@@ -1,5 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
+#include <X11/XF86keysym.h>
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -62,6 +64,9 @@ static char dmenumon[8]; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *screenshot[] = { "sh", "-c", "maim --select | xclip -selection clipboard -target image/png", NULL};
+static const char *volup[] = { "wpctl", "set-volume", "@DEFAULT_SINK@", "5%+", NULL};
+static const char *voldown[] = { "wpctl", "set-volume", "@DEFAULT_SINK@", "5%-", NULL};
+static const char *voltoggle[] = { "wpctl", "set-mute", "@DEFAULT_SINK@", "toggle", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -90,6 +95,9 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
   { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = screenshot} },
+  { 0,                         XF86XK_AudioLowerVolume, spawn, {.v = voldown } },
+  { 0,                         XF86XK_AudioRaiseVolume, spawn, {.v = volup } },
+  { 0,                         XF86XK_AudioMute,        spawn, {.v = voltoggle } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
