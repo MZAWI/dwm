@@ -64,9 +64,9 @@ static char dmenumon[8]; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *screenshot[] = { "sh", "-c", "maim --select | xclip -selection clipboard -target image/png", NULL};
-static const char *volup[] = { "wpctl", "set-volume", "@DEFAULT_SINK@", "5%+", NULL};
-static const char *voldown[] = { "wpctl", "set-volume", "@DEFAULT_SINK@", "5%-", NULL};
-static const char *voltoggle[] = { "wpctl", "set-mute", "@DEFAULT_SINK@", "toggle", NULL};
+static const char *volup[] = { "sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ && pkill -RTMIN+8 dwmblocks", NULL};
+static const char *voldown[] = { "sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && pkill -RTMIN+8 dwmblocks", NULL};
+static const char *voltoggle[] = { "sh", "-c", "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && pkill -RTMIN+8 dwmblocks", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
