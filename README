@@ -4,10 +4,11 @@ Vast majority of code is base [dwm](https://dwm.suckless.org/)
 and applied [patches](https://dwm.suckless.org/patches). 
 I hardly wrote anything by myself here.
 
-Installed patches
+Applied patches
 ------------
 xrdb
 statuscmd
+gaplessgrid
 
 
 Installation
